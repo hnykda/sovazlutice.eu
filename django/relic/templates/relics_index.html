@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block current_item4 %}class="current-menu-item" {% endblock %}
+{% block head_title %}{{ 'Památky' }}{% endblock %}
+{% block metadesc %}  'Zde naleznete seznam všech památek, o které se SOVa s dalšími dobrovolníky stará.'  {% endblock %}
+{% block content %}
+{% load thumbnail %}
+<h5 class="caption" align="center">Po kliknutí na název stezky v menu níže se vyfiltrují jen památky relevantní k dané stezce</h5>
+<br/>
+            <ul id="filter-buttons">
+                <li><a href="#" data-filter="*" class="selected">Všechny památky</a></li>
+                <li>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </li>
+                <li><a href="#" data-filter=".ssr">Stezka sovy Rozárky</a></li>
+                <li>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </li>
+                <li><a href="#" data-filter=".kc">Křížková cesta</a></li>
+                <li>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </li>
+                <li><a href="#" data-filter=".czp">Cesta za pověstí</a></li>
+                
+            </ul>
+            
+            <!-- Filter container -->
+                <ul id="filter-container" class="feature cf">
+              {% if relics %}
+              {% for relic in relics %}
+                    <li class="
+                        {% if relic.w_ssr == True %}
+                        ssr
+                        {% else %}
+                        {% endif %}
+                        
+                        {% if relic.w_kc == True %}
+                        kc
+                        {% else %}
+                        {% endif %}
+                        
+                        {% if relic.w_czp == True %}
+                        czp
+                        {% else %}
+                        {% endif %}">
+                        <a href="/relic/view/{{relic.slug}}" class="thumb" ><img src="{{relic.pic|thumbnail_url:'galRelThum'}}" alt="" />
+<!--                            <div class="date"><span class="d">{{ dam.0 }}</span><span class="m">{{ dam.1 }}</span></div> -->
+<!--                            <div class="date"><span class="d">{{ relic.posted.day }}</span><span class="m">Února</span></div>-->
+                        </a>
+                        <h5 class="caption">{{relic.title}}</h5>
+                    </li>
+               {% endfor %}
+               {% else %}
+               <p>There are no relics.</p>
+               {% endif %}
+                  
+                  
+                
+                </ul><!-- ENDS Filter container -->
+        {% endblock %}

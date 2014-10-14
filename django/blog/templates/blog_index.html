@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block current_item3 %}class="current-menu-item" {% endblock %}
+{% block head_title %}{{ 'Články' }}{% endblock %}
+{% block metadesc %} 'Blog SOVy s novými informaci o našich aktivitách. Naleznete zde reporty z různých akcí, rozhovory, poděkování...' {% endblock %}
+
+
+{% block content %}
+
+<!-- posts list -->
+<div id="posts-list" class="cf">
+    {% if posts %}
+    {% for post in posts %}
+    <article>
+        <div class="feature-image">
+            {% ifnotequal post.pic "" %}
+            <a href="/blog/view/{{post.slug}}"><img src="{{post.pic|thumbnail_url:"blogpost"}}" alt="Thumbnail" /></a>
+            {% else %}
+            <a href="/blog/view/{{post.slug}}"><img src="{{ STATIC_URL }}central/img/dummies/sova_blog_put1.png" alt="Thumbnail" /></a>
+            {% endifnotequal %}
+            <div class="entry-date">
+                <div class="month">{{ post.posted|date:"N" }}</div>
+                <div class="number">{{ post.posted.day }}</div>
+            </div>
+        </div>
+        <div class="excerpt">
+            <a href="/blog/view/{{post.slug}}" class="post-heading">
+                {% block title %}{{ post.title }}{% endblock %}</a>
+            <p>
+                {{ post.body|truncatewords:50|safe}}
+            </p>
+        </div>
+                <div class="meta">
+						<span class="user">Autor: MUDr. Hana Hnykova, </span>
+                        <span class="comments"> {{ post.posted }}</span>
+
+					</div>
+    </article>
+
+    {% endfor %}
+    {% else %}
+    <p><h4>Zde již nejsou žádné další články.</h4></p>
+    {% endif %}
+
+
+    <!-- page-navigation -->
+    <div class="page-navigation cf">
+        {% if prev != 'no_prev' %}
+        <div class="nav-next"><a href="/blog/{{prev}}">Novější</a></div>
+        {% endif %}
+
+        {% if check_length == 0 %}
+        <div class="nav-previous"><a href="/blog/{{next}}">Starší</a></div>
+        {% endif %}
+    </div>
+    <!--ENDS page-navigation -->
+
+</div>
+<!-- ENDS posts list -->
+
+<!-- sidebar -->
+<aside id="sidebar">
+
+<img src="{{STATIC_URL}}central/img/works/vily.png" alt="Thumbnail"></a>
+</aside>
+<!-- ENDS sidebar -->
+
+
+{% endblock %}

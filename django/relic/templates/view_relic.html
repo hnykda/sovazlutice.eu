@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block current_item4 %}class="current-menu-item" {% endblock %}
+{% block head_title %}{{relic.title}}{% endblock %}
+{% block content %}
+{% load thumbnail %}
+
+<!-- page-content -->
+<div class="page-content portfolio-content">
+
+    <!-- entry-content -->
+    <div class="entry-content cf">
+
+
+        <h2 class="caption">{{ relic.title }}</h2>
+        <!-- project content -->
+        <div class="project-content">
+            {{relic.body|safe}}
+            </p>
+         {% if relic.sign != "" %}
+         <h4 class="caption">Nápis</h4>
+           <span class="pullquote-left">{{ relic.sign|safe }}</span>
+         {% endif %}
+        </div>
+        <!-- ENDS project content -->
+
+        <!-- project info -->
+        <div class="project-info">
+            {% if relic.place != "" %}
+            <p><strong>Umístění</strong>{{relic.place|safe}}</p>
+            {% endif %}
+            {% if relic.gps != "" %}
+            <p><strong>GPS</strong>{{ relic.gps }}</p>
+            {% endif %}
+            {% if relic.date_od_build != "" %}
+            <p><strong>Datum vzniku</strong>{{ relic.date_of_build }}</p>
+            {% endif %}
+            {% if relic.reconstruction != "" %}
+            <p><strong>Rekonstrukce</strong>{{ relic.reconstruction }}</p>
+            {% endif %}
+            {% if relic.price_of_rec != None %}
+            <p><strong>Cena rekonstrukce</strong>{{ relic.price_of_rec }}</p>
+            {% endif %}
+            {% if relic.source_of_finance != "" %}
+            <p><strong>Zdroj financí</strong>{{ relic.source_of_finance }}</p>
+            {% endif %}
+            {% if relic.owner != "" %}
+            <p><strong>Majitel</strong>{{ relic.owner }}</p>
+            {% endif %}
+            {% if relic.type_of_r != "" %}
+            <p><strong>Typ památky</strong>{{ relic.type_of_r }}</p>
+            {% endif %}
+            {% if relic.katalog_numb != "" %}
+            <p><strong>Rejstříkové č. </strong>{{ relic.katalog_numb }}</p>
+            {% endif %}
+        </div>
+
+        </div>
+        <!-- ENDS project info -->
+
+    </div>
+    <!-- ENDS entry-content -->
+
+    <div class="c-1"></div>
+    <div class="c-2"></div>
+    <div class="c-3"></div>
+    <div class="c-4"></div>
+</div>
+<!-- ENDS page-content -->
+<!-- SLIDER -->
+{% if pics %}
+<div class="slider-wrapper theme-default">
+    <div class="ribbon"></div>
+    <div id="slider-project" class="nivoSlider">
+        {% for pic, desc in pics %}
+
+        {% if desc != "" %}
+        <a href="{{ pic.url }}">
+            <img src="{{ pic|thumbnail_url:'nivoSlider' }}" title="{{ desc }}"/>
+        </a>
+        {% endif %}
+
+        {% endfor %}
+        {% else %}
+        <p>There are no pics</p>
+        {% endif %}
+    </div>
+
+</div>
+<!-- ENDS SLIDER -->
+
+<!--START DISQUS THREAD -->
+<div class="slider-wrapper theme-default">
+   <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'sovazlutice'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>    
+</div>
+<!-- ENDS DISQUS THREAD -->
+
+{% endblock %}

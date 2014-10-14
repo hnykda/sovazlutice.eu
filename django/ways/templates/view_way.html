@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block current_item2 %}class="current-menu-item" {% endblock %}
+{% block head_title %}{{ way.title }}{% endblock %}
+{% block content %}
+
+
+<!-- page-content -->
+<div class="page-content portfolio-content">
+
+    <!-- entry-content -->
+    <div class="entry-content cf">
+
+
+        <h2>{{ way.title }}</h2>
+        <!-- project content -->
+        <div class="project-content">
+            {{way.body|safe}}</p>
+        </div>
+        <!-- ENDS project content -->
+
+        <!-- project info -->
+        <div class="project-info">
+            <p><strong>Délka</strong>{{way.length}} km</p>
+
+            <p><strong>Značení</strong>{{ way.marks }}</p>
+            <p><strong>Popis</strong>{{ way.the_path|safe }}</p>
+
+            <p><strong>Mapa</strong>
+                <a href="{{ way.map_of_way.url }}"><img src="{{ way.map_of_way|thumbnail_url:"small" }}"/></p></a>
+
+        </div>
+        <!-- ENDS project info -->
+
+</div>
+<!-- ENDS entry-content -->
+
+        <!-- Interests -->
+    <!-- POZOR! TADY MI NĚJAK NESEDÍ TY PODMÍNKY, NEFUNGUJE SPRÁVNĚ A JSOU RŮZNÉ!!! -->
+        {% if way.interest1_name != '' %}
+        <h2 class="heading">Zajímavosti</h2>
+
+        {% if way.insterest1_body != ''  %}
+        <div class="toggle-trigger"><i></i>{{ way.interest1_name }}</div>
+        <div class="toggle-container">
+
+            {{ way.interest1_body|safe }}
+        </div>
+        {% else %}
+        {% endif %}
+
+        {% if way.insterest2_body != ""  %}
+        <div class="toggle-trigger"><i></i>{{ way.interest2_name }}</div>
+        <div class="toggle-container">
+            {{ way.interest2_body|safe }}
+        </div>
+        {% else %}
+        {% endif %}
+
+        {% if way.insterest3_name != "" %}
+        <div class="toggle-trigger"><i></i>{{ way.interest3_name }}</div>
+        <div class="toggle-container">
+            {{ way.interest3_body|safe }}
+        </div>
+        {% else %}
+        {% endif %}
+
+        {% else %}
+        <p>No interests</p>
+        {% endif %}
+
+    </div>
+
+    <i class="tape"></i>
+    <!-- END interests -->
+
+
+<div class="c-1"></div>
+<div class="c-2"></div>
+<div class="c-3"></div>
+<div class="c-4"></div>
+</div><!-- ENDS page-content -->
+
+<!-- SLIDER -->
+{% if pics %}
+<div class="slider-wrapper theme-default">
+    <div class="ribbon"></div>
+    <div id="slider-project" class="nivoSlider">
+        {% for pic, desc in pics %}
+
+        {% if desc != "" %}
+        <a href="{{ pic.url }}">
+        <img src="{{ pic|thumbnail_url:'nivoSlider' }}" title="{{ desc }}"/>
+        </a>
+        {% endif %}
+
+        {% endfor %}
+        {% else %}
+        <p>There are no pics</p>
+        {% endif %}
+    </div>
+</div>
+<!-- ENDS SLIDER -->
+
+
+
+<!--START DISQUS THREAD -->
+<div class="slider-wrapper theme-default">
+   <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'sovazlutice'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>    
+</div>
+<!-- ENDS DISQUS THREAD -->
+
+{% endblock %}
