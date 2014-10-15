@@ -1,38 +1,43 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import blog.models
+import easy_thumbnails.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Blog'
-        db.create_table('blog_blog', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=100, unique=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=100, unique=True)),
-            ('body', self.gf('django.db.models.fields.TextField')()),
-            ('posted', self.gf('django.db.models.fields.DateField')(blank=True, auto_now_add=True, db_index=True)),
-        ))
-        db.send_create_signal('blog', ['Blog'])
+    dependencies = [
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'Blog'
-        db.delete_table('blog_blog')
-
-
-    models = {
-        'blog.blog': {
-            'Meta': {'object_name': 'Blog'},
-            'body': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'posted': ('django.db.models.fields.DateField', [], {'blank': 'True', 'auto_now_add': 'True', 'db_index': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'unique': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '100', 'unique': 'True'})
-        }
-    }
-
-    complete_apps = ['blog']
+    operations = [
+        migrations.CreateModel(
+            name='Blog',
+            fields=[
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('title', models.CharField(verbose_name='Nadpis článku', unique=True, max_length=100)),
+                ('slug', models.SlugField(verbose_name='Neměnit!', unique=True, max_length=100)),
+                ('body', models.TextField(verbose_name='Obsah článku')),
+                ('posted', models.DateField(auto_now_add=True, db_index=True)),
+                ('pic', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, verbose_name='Titulní foto', null=True)),
+                ('pic2', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_2', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+                ('pic3', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_3', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+                ('pic4', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_4', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+                ('pic5', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_5', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+                ('pic6', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_6', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+                ('pic7', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_7', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+                ('pic8', easy_thumbnails.fields.ThumbnailerImageField(upload_to=blog.models.get_name_file, blank=True, null=True)),
+                ('picd_8', models.CharField(blank=True, verbose_name='Popis', null=True, max_length=100)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+    ]

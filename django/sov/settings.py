@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'south',
+#    'south',
 #    'photologue', # tohle prostě nefunguje - sice to nahraje zip do photologue/temp/file.zip,
 #    'pytz',       # ale nerozbalí ho
     'easy_thumbnails',

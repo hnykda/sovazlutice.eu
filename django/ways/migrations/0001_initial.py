@@ -1,60 +1,53 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import easy_thumbnails.fields
+import ways.models
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Way'
-        db.create_table('ways_way', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=100, unique=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=100, unique=True)),
-            ('body', self.gf('django.db.models.fields.TextField')()),
-            ('marks', self.gf('django.db.models.fields.TextField')()),
-            ('length', self.gf('django.db.models.fields.SlugField')(max_length=100, unique=True)),
-            ('interests', self.gf('django.db.models.fields.TextField')()),
-            ('map_of_way', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic1', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic2', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic3', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic4', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic5', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic6', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic7', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('pic8', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-        ))
-        db.send_create_signal('ways', ['Way'])
+    dependencies = [
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'Way'
-        db.delete_table('ways_way')
-
-
-    models = {
-        'ways.way': {
-            'Meta': {'object_name': 'Way'},
-            'body': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'interests': ('django.db.models.fields.TextField', [], {}),
-            'length': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'unique': 'True'}),
-            'map_of_way': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'marks': ('django.db.models.fields.TextField', [], {}),
-            'pic1': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic2': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic3': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic4': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic5': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic6': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic7': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'pic8': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'unique': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '100', 'unique': 'True'})
-        }
-    }
-
-    complete_apps = ['ways']
+    operations = [
+        migrations.CreateModel(
+            name='Way',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('title', models.CharField(unique=True, max_length=100)),
+                ('slug', models.SlugField(unique=True, max_length=100)),
+                ('body', models.TextField(verbose_name='Popis stezky obecně')),
+                ('marks', models.CharField(max_length=100, verbose_name='Značka')),
+                ('the_path', models.TextField(verbose_name='Popis trasy', null=True, blank=True)),
+                ('length', models.SlugField(max_length=100, verbose_name='Délka')),
+                ('interest1_name', models.CharField(max_length=100, verbose_name='Název zajímavosti 1', blank=True, null=True)),
+                ('interest1_body', models.TextField(verbose_name='Popis zajímavosti 1', null=True, blank=True)),
+                ('interest2_name', models.CharField(max_length=100, verbose_name='Název zajímavosti 2', blank=True, null=True)),
+                ('interest2_body', models.TextField(verbose_name='Popis zajímavosti 2', null=True, blank=True)),
+                ('interest3_name', models.CharField(max_length=100, verbose_name='Název zajímavosti 3', blank=True, null=True)),
+                ('interest3_body', models.TextField(verbose_name='Popis zajímavosti 3', null=True, blank=True)),
+                ('map_of_way', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to='pictures/ways/maps')),
+                ('pic1', easy_thumbnails.fields.ThumbnailerImageField(upload_to=ways.models.get_name_file, verbose_name='Titulní foto', blank=True, null=True)),
+                ('picd_1', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic2', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_2', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic3', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_3', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic4', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_4', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic5', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_5', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic6', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_6', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic7', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_7', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+                ('pic8', easy_thumbnails.fields.ThumbnailerImageField(null=True, blank=True, upload_to=ways.models.get_name_file)),
+                ('picd_8', models.CharField(max_length=100, verbose_name='Popis', blank=True, null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+    ]
