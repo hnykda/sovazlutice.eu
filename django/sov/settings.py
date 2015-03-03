@@ -23,7 +23,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 SECRET_KEY = 'kz(3_kt_tres(^jbbfqr6qwoyfhign&1vlu@t@kr48+sz10a&f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
