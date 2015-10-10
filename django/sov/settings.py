@@ -16,11 +16,7 @@ MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kz(3_kt_tres(^jbbfqr6qwoyfhign&1vlu@t@kr48+sz10a&f'
+SECRET_KEY = open("/var/www/sovazlutice/secret_key.txt").read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
