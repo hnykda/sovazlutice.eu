@@ -19,7 +19,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 SECRET_KEY = open("/var/www/sovazlutice/secret_key.txt").read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
