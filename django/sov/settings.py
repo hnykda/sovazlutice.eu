@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'blog',
     'relic',
     'ways',
-    'django_summernote',
+#    'django_summernote',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,6 +118,6 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
-SUMMERNOTE_CONFIG = {
-    'lang' : 'cs-CZ',
-}
+#SUMMERNOTE_CONFIG = {
+#    'lang' : 'cs-CZ',
+#}

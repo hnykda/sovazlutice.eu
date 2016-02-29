@@ -13,5 +13,5 @@ urlpatterns = patterns('',
         'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
-    url(r'^summernote/', include('django_summernote.urls')),
+#    url(r'^summernote/', include('django_summernote.urls')),
 )
