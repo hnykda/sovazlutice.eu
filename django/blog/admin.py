@@ -1,11 +1,10 @@
 from django.contrib import admin
 from blog.models import Blog
-#from django_summernote.admin import SummernoteModelAdmin
 
 from django.db import models
 from django import forms
 
-class BlogAdmin(admin.ModelAdmin):#(SummernoteModelAdmin):
+class BlogAdmin(admin.ModelAdmin):
     exclude = ['posted']
     prepopulated_fields = {'slug': ('title',)}
     list_display = ('title', 'posted')
