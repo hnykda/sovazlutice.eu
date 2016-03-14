@@ -20,6 +20,7 @@ class Way(models.Model):
     marks = models.CharField(max_length=100, verbose_name='Značka')
     the_path = models.TextField(verbose_name="Popis trasy", null=True, blank=True)
     length = models.SlugField(max_length=100, verbose_name="Délka")
+    posted = models.BooleanField(default=True, verbose_name="Zveřejnit")
 
     interest1_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="Název zajímavosti 1")
     interest1_body = models.TextField(null=True, blank=True, verbose_name="Popis zajímavosti 1")
