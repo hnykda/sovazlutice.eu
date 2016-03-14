@@ -3,7 +3,7 @@ from ways.models import Way
 
 def ways_index(request):
     context = {
-        'ways': Way.objects.all()
+        'ways': Way.objects.filter(posted=True)
     }
     return render(request, 'ways_index.html', context)
 

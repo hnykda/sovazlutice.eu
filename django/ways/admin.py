@@ -5,7 +5,7 @@ from django import forms
 
 class WayAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', )
+    list_display = ('title', 'posted' )
 
     formfield_overrides = { models.TextField: {'widget': forms.Textarea(attrs={'class':'ckeditor'})}, }
 
