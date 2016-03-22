@@ -32,7 +32,7 @@ body {
 	line-height: 1;
 }
 ol, ul {
-        list-style: none;
+    list-style: none;
 }
 blockquote, q {
 	quotes: none;
@@ -45,4 +45,14 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+/* hack na to, aby se list v accordionech ukazoval hezky */
+.toggle-container > ul > li {
+    list-style-image: url(../img/bullets/check.png);
+    line-height: 1.5em;
+}
+.toggle-container > ul{
+    margin-bottom: 30px;
+    margin-left: 20px;
 }
