@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'blog',
     'relic',
     'ways',
-#    'django_summernote',
 )
 
 MIDDLEWARE_CLASSES = (

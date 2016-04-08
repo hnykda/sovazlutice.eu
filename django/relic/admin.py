@@ -1,6 +1,5 @@
 from django.contrib import admin
 from relic.models import Relic
-#from django_summernote.admin import SummernoteModelAdmin
 
 from django.db import models
 from django import forms
