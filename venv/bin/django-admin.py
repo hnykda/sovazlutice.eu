@@ -1,4 +1,4 @@
-#!/var/www/sovazlutice/work_dir/venv/bin/python3.5
+#!/var/www/sovazlutice/work_dir/virtenv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
