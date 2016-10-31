@@ -29,9 +29,12 @@ class Relic(models.Model):
     
 
     # Tags for filtering
+    # tohle by melo byt dynamicky...
     w_ssr = models.BooleanField(default=False, verbose_name="Stezka sovy Rozárky")
     w_kc = models.BooleanField(default=False, verbose_name="Křížková cesta")
     w_czp = models.BooleanField(default=False, verbose_name="Cesta za pověstí")
+    w_csj = models.BooleanField(default=False, verbose_name="Cesta sv. Jakuba")
+    w_div = models.BooleanField(default=False, verbose_name="Cesta divočinou")
     
     pic = ThumbnailerImageField(upload_to=get_name_file, null=True, blank=True, verbose_name="Titulní foto")
 

@@ -14,10 +14,14 @@
                 <li><a href="#" data-filter=".kc">Křížková cesta</a></li>
                 <li>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </li>
                 <li><a href="#" data-filter=".czp">Cesta za pověstí</a></li>
+                <li>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </li>
+                <li><a href="#" data-filter=".csj">Cesta sv. Jakuba</a></li>
+                <li>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </li>
+                <li><a href="#" data-filter=".div">Cesta divočinou</a></li>
                 
             </ul>
             
-            <!-- Filter container -->
+            <!-- Hehe! Ze nevis, co to dela! Fuck you - tve minule ja. -->
                 <ul id="filter-container" class="feature cf">
               {% if relics %}
               {% for relic in relics %}
@@ -31,7 +35,17 @@
                         kc
                         {% else %}
                         {% endif %}
-                        
+
+                        {% if relic.w_csj == True %}
+                        csj
+                        {% else %}
+                        {% endif %}
+
+                        {% if relic.w_csj == True %}
+                        div
+                        {% else %}
+                        {% endif %}
+
                         {% if relic.w_czp == True %}
                         czp
                         {% else %}
