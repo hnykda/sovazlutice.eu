@@ -1,7 +1,7 @@
 #!/bin/bash
  
 NAME="sovazlutice.eu"                                  # Name of the application
-DJANGODIR=/var/www/sovazlutice/production/django/             # Django project directory
+DJANGODIR=/var/www/sovazlutice/$ENVIRONMENT/django/             # Django project directory
 SOCKFILE=/var/www/sovazlutice/run/gunicorn.sock  # we will communicte using this unix socket
 USER=nginx                                        # the user to run as
 GROUP=webdata                                     # the group to run as
@@ -14,7 +14,7 @@ echo "Starting $NAME as `whoami`"
  
 # Activate the virtual environment
 cd $DJANGODIR
-source /var/www/sovazlutice/production/virtenv/bin/activate
+source /var/www/sovazlutice/$ENVIRONMENT/virtenv/bin/activate
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
  
@@ -24,7 +24,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
  
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec /var/www/sovazlutice/production/virtenv/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+exec /var/www/sovazlutice/$ENVIRONMENT/virtenv/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --workers $NUM_WORKERS \
   --log-level=warning \
