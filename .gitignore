@@ -2,3 +2,4 @@ __pycache__/
 *.py[cod]
 virtenv
 django/db.sqlite3
+django/media

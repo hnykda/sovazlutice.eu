@@ -6,8 +6,15 @@
 {% block meta_desc %} 'Zde naleznete seznam všech turistických stezek, o které se SOVa stará.' {% endblock %}
 
 {% block content %}
-
+<div>
+</div>
 <!-- Filter container -->
+    <div style="text-align:center">
+        <h3>
+            Přehled Žlutických stezek můžete <a href="{{ STATIC_URL }}central/img/souhrn_stezek.jpg">stáhnout zde</a>.
+        </h3>
+        <br />
+    </div>
 <ul id="filter-container" class="feature cf">
     {% if ways %}
     {% for way in ways %}
