@@ -3,8 +3,9 @@ services:
     image: dtj
     build: .
     volumes:
-      - './data/static:/static'
-      - './data/media:/media'
+      - './data/static:/src/static'
+      - './data/media:/src/media'
+      - './data/db.sqlite3:/src/db.sqlite3'
   proxy:
     image: nginx:alpine
     volumes:
