@@ -1,6 +1,5 @@
 services:
   app:
-    restart: unless-stopped
     image: dtj
     build: .
     working_dir: /
@@ -8,7 +7,6 @@ services:
       - './django-inner:/django'
   proxy:
     image: nginx:alpine
-    restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./django-inner/static:/dstatic
