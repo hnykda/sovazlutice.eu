@@ -4,10 +4,12 @@ services:
     image: dtj
     build: .
     working_dir: /
+    volumes:
+      - './django-inner:/django'
   proxy:
-    image: nginx:alpine
+    image: nginx:alpine`
     restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./django/static:/dstatic
-      - ./django/media:/dmedia
+      - ./django-inner/static:/dstatic
+      - ./django-inner/media:/dmedia
