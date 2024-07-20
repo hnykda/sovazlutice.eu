@@ -16,3 +16,5 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./data/static:/dstatic
       - ./data/media:/dmedia
+    labels:
+      - 'traefik.http.services.http-0-oocw04c.loadbalancer.server.port=8001' 
