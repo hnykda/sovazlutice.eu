@@ -2,12 +2,16 @@ services:
   app:
     image: dtj
     build: .
+    expose:
+      - 8000
     volumes:
       - './data/static:/src/static'
       - './data/media:/src/media'
       - './data/db.sqlite3:/src/db.sqlite3'
   proxy:
     image: nginx:alpine
+    expose:
+      - 8001
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./data/static:/dstatic
