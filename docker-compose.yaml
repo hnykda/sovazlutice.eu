@@ -3,10 +3,13 @@ services:
     image: dtj
     build: .
     volumes:
-      - './data/static:/static'
-      - './data/media:/media'
-    expose:
-      - 8000
+      - './data/static:/src/static'
+      - './data/media:/src/media'
+      - './data/db.sqlite3:/src/db.sqlite3'
+    environment:
+      DJANGO_SECRET_KEY: a
+    ports:
+      - 8000:8000
   proxy:
     image: nginx:alpine
     volumes:
