@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "..", "media")
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
@@ -107,7 +107,7 @@ THUMBNAIL_ALIASES = {
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "sfiles"), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "..", "sfiles"), )
 
 # Templates
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
