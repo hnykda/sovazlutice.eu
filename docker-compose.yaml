@@ -5,8 +5,6 @@ services:
     volumes:
       - './data/static:/static'
       - './data/media:/media'
-    expose:
-      - 8000
   proxy:
     image: nginx:alpine
     volumes:
