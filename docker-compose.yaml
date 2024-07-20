@@ -17,4 +17,6 @@ services:
       - ./data/static:/dstatic
       - ./data/media:/dmedia
     labels:
+      # because nginx exposes by default port 80 and I expose 8001 in addition
+      # to it, traefik needs to know what to redirect to https://doc.traefik.io/traefik/providers/docker/#port-detection
       - 'traefik.http.services.http-0-oocw04c.loadbalancer.server.port=8001' 
