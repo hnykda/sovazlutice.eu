@@ -4,10 +4,6 @@ services:
     image: dtj
     build: .
     working_dir: /
-    volumes:
-      - ./django:/django
-      # WARNING: this is in the dockerfile as well!
-      - ./gunicorn_start:/gunicorn_start
   proxy:
     image: nginx:alpine
     restart: unless-stopped
