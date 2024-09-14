@@ -2,8 +2,6 @@ services:
   app:
     image: dtj
     build: .
-    expose:
-      - 8000
     volumes:
       - './data/static:/src/static'
       - './data/media:/src/media'
