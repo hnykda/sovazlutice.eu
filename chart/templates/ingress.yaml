@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: sovazlutice
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-http01
 spec:
   tls:
     - secretName: sovazlutice-tls
