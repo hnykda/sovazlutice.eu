@@ -31,3 +31,26 @@ helm upgrade --install sovazlutice ./chart --namespace apps
 ```bash
 SOPS_AGE_KEY_FILE=/path/to/age-key.txt sops secrets/secrets.yaml
 ```
+
+## Media Files
+
+Media files (django/media/pictures/) are stored on a Persistent Volume Claim (PVC) in Kubernetes, not in the Docker image.
+
+**Restore media files to PVC** (after fresh deployment or if media is missing):
+```bash
+# On the Hera server
+cd /root/server-files/repos/sovazlutice
+tar czf /tmp/media-pictures.tar.gz -C django/media pictures
+
+# Copy to local machine and then to pod
+POD=$(kubectl get pods -n apps -l app=sovazlutice -o jsonpath='{.items[0].metadata.name}')
+kubectl cp /tmp/media-pictures.tar.gz apps/$POD:/tmp/media-pictures.tar.gz -c django
+kubectl exec -n apps $POD -c django -- sh -c "cd /src/media && tar xzf /tmp/media-pictures.tar.gz"
+```
+
+**Backup media files from PVC**:
+```bash
+POD=$(kubectl get pods -n apps -l app=sovazlutice -o jsonpath='{.items[0].metadata.name}')
+kubectl exec -n apps $POD -c django -- tar czf /tmp/media-backup.tar.gz -C /src/media pictures
+kubectl cp apps/$POD:/tmp/media-backup.tar.gz /tmp/media-backup-$(date +%Y%m%d).tar.gz -c django
+```
