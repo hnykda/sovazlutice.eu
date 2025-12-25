@@ -29,7 +29,7 @@ steps:
       KUBECONFIG_DATA:
         from_secret: hera_kubeconfig
       SOPS_AGE_KEY:
-        from_secret: sops_age_key
+        from_secret: age_sops_secret_key
     commands:
       - mkdir -p ~/.kube
       - echo "$KUBECONFIG_DATA" | base64 -d > ~/.kube/config
