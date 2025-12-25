@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sovazlutice-db
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: database-storage
+  resources:
+    requests:
+      storage: {{ .Values.persistence.db.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sovazlutice-static
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.static.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sovazlutice-media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.media.size }}

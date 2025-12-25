@@ -1,0 +1,33 @@
+# Dockerfile for K8s deployment
+# Using Python 3.9 for compatibility with Django 1.8
+FROM python:3.9-slim
+
+# Install system dependencies (including build deps for Pillow)
+RUN apt-get update && apt-get install -y \
+    sqlite3 \
+    zlib1g-dev \
+    libjpeg-dev \
+    libpng-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create working directory
+RUN mkdir -p /src
+WORKDIR /src
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt gunicorn_start ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy Django application
+COPY django ./django
+
+# Create directories for static files, media, and database
+RUN mkdir -p /src/static /src/media && \
+    chmod +x gunicorn_start
+
+# Expose port for gunicorn
+EXPOSE 8000
+
+# Run gunicorn
+CMD ["sh", "gunicorn_start"]

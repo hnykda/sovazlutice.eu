@@ -1,0 +1,27 @@
+when:
+  - event: push
+    branch: master
+
+steps:
+  - name: build
+    image: woodpeckerci/plugin-docker-buildx
+    settings:
+      repo: localhost:32000/sovazlutice
+      registry: localhost:32000
+      dockerfile: Dockerfile.k8s
+      tag: ${CI_COMMIT_SHA:0:8}
+      platforms: linux/amd64
+
+  - name: deploy
+    image: alpine/helm:3.14.0
+    environment:
+      KUBECONFIG_DATA:
+        from_secret: hera_kubeconfig
+      SOPS_AGE_KEY:
+        from_secret: sops_age_key
+    commands:
+      - mkdir -p ~/.kube
+      - echo "$KUBECONFIG_DATA" | base64 -d > ~/.kube/config
+      - apk add --no-cache sops kubectl
+      - sops -d secrets/secrets.yaml | kubectl apply -f -
+      - helm upgrade --install sovazlutice ./chart --namespace apps --set image.tag=${CI_COMMIT_SHA:0:8}

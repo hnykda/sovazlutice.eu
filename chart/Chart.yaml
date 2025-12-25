@@ -1,0 +1,4 @@
+apiVersion: v2
+name: sovazlutice
+description: Sovazlutice Django application
+version: 1.0.0
