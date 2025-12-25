@@ -2,4 +2,7 @@ __pycache__/
 *.py[cod]
 virtenv
 django/db.sqlite3
+# Media files are tracked in git but also ignored to prevent accidental commits
+# Media files should be managed on the PVC, not in git
+# See README.md for media file management instructions
 django/media
