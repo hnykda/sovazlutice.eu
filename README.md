@@ -34,23 +34,6 @@ SOPS_AGE_KEY_FILE=/path/to/age-key.txt sops secrets/secrets.yaml
 
 ## Media Files
 
-Media files (django/media/pictures/) are stored on a Persistent Volume Claim (PVC) in Kubernetes, not in the Docker image.
+Media files (django/media/pictures/) are tracked in git and copied to a Persistent Volume Claim (PVC) in Kubernetes during deployment.
 
-**Restore media files to PVC** (after fresh deployment or if media is missing):
-```bash
-# On the Hera server
-cd /root/server-files/repos/sovazlutice
-tar czf /tmp/media-pictures.tar.gz -C django/media pictures
-
-# Copy to local machine and then to pod
-POD=$(kubectl get pods -n apps -l app=sovazlutice -o jsonpath='{.items[0].metadata.name}')
-kubectl cp /tmp/media-pictures.tar.gz apps/$POD:/tmp/media-pictures.tar.gz -c django
-kubectl exec -n apps $POD -c django -- sh -c "cd /src/media && tar xzf /tmp/media-pictures.tar.gz"
-```
-
-**Backup media files from PVC**:
-```bash
-POD=$(kubectl get pods -n apps -l app=sovazlutice -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -n apps $POD -c django -- tar czf /tmp/media-backup.tar.gz -C /src/media pictures
-kubectl cp apps/$POD:/tmp/media-backup.tar.gz /tmp/media-backup-$(date +%Y%m%d).tar.gz -c django
-```
+**Note**: Media files are version controlled in git. For fresh deployments, files from git will need to be copied to the PVC. The PVC persists across regular redeployments, so media files won't be lost during normal operations.
