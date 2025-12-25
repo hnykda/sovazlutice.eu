@@ -5,7 +5,7 @@ image:
 nginx:
   image: nginx:alpine
 
-host: sovazlutice.hera.danielhnyk.cz
+host: sovazlutice.eu
 
 persistence:
   db:
