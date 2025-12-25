@@ -17,6 +17,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: database-storage
   resources:
     requests:
       storage: {{ .Values.persistence.static.size }}
@@ -28,6 +29,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: database-storage
   resources:
     requests:
       storage: {{ .Values.persistence.media.size }}

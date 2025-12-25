@@ -18,6 +18,12 @@ spec:
         - name: collectstatic
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["python", "django/manage.py", "collectstatic", "--noinput"]
+          env:
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sovazlutice-secrets
+                  key: secret-key
           volumeMounts:
             - name: static
               mountPath: /src/static

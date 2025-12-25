@@ -22,6 +22,7 @@ steps:
     commands:
       - mkdir -p ~/.kube
       - echo "$KUBECONFIG_DATA" | base64 -d > ~/.kube/config
-      - apk add --no-cache sops kubectl
-      - sops -d secrets/secrets.yaml | kubectl apply -f -
-      - helm upgrade --install sovazlutice ./chart --namespace apps --set image.tag=${CI_COMMIT_SHA:0:8}
+      - apk add --no-cache sops
+      - export SOPS_AGE_KEY_FILE=/tmp/age-key.txt
+      - echo "$SOPS_AGE_KEY" > $SOPS_AGE_KEY_FILE
+      - helm upgrade --install sovazlutice ./chart --namespace apps --set image.tag=${CI_COMMIT_SHA:0:8} -f <(sops -d chart/values.secrets.enc.yaml)
